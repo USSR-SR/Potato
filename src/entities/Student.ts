@@ -1,5 +1,6 @@
 import { Field, ObjectType } from "type-graphql";
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { FlashCard } from "./FlashCard";
 import { StudentCourse } from "./StudentCourse";
 
 @ObjectType()
@@ -27,5 +28,8 @@ export class Student extends BaseEntity {
 
   @OneToMany(()=> StudentCourse, (studentCourse) => studentCourse.student )
   studentCourses: StudentCourse[]
+
+  @OneToMany(()=>FlashCard,(FlashCard)=>FlashCard.student)
+  FlashCards: FlashCard[]
 
 }
