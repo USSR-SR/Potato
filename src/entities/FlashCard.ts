@@ -7,6 +7,9 @@ import { StudentCourse } from "./StudentCourse";
 @Entity()
 export class FlashCard extends BaseEntity{
     @Field()
+    @PrimaryGeneratedColumn()
+    id:number;
+    @Field()
     @Column()
     dataFront:string
 
@@ -14,6 +17,6 @@ export class FlashCard extends BaseEntity{
     @Column()
     dataBack:string
 
-    @ManyToOne(()=>Student,(Student)=>Student.FlashCards,{primary:true})
+    @ManyToOne(()=>Student,(Student)=>Student.FlashCards)
     student:Student;
 }

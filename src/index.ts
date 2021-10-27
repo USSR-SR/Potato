@@ -9,6 +9,7 @@ import { CourseResolver } from "./resolvers/course";
 import cors from "cors";
 import { MyContext } from "./types";
 import { StudentResolver } from "./resolvers/student";
+import { FlashCardREsolver } from "./resolvers/flashcard";
 
 const main = async () => {
   const conn = await createConnection(ormConfig);
@@ -25,7 +26,7 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [CourseResolver, StudentResolver],
+      resolvers: [CourseResolver, StudentResolver,FlashCardREsolver],
       validate: false,
     }),
     context: ({ req, res }): MyContext => ({ req, res }),
