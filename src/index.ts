@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-console.log("gand-mara");
-=======
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import { __prod__ } from "./constants";
@@ -43,4 +40,3 @@ const main = async () => {
 main().catch((err) => {
   console.log(err);
 });
->>>>>>> 1970039ec117552c156f815583fa50f4e7942771
