@@ -1,5 +1,6 @@
 import { Field, ObjectType } from "type-graphql";
 import { BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Course } from "./Course";
 import { Student } from "./Student";
 
 @ObjectType()
@@ -13,7 +14,7 @@ export class StudentCourse extends BaseEntity{
     @ManyToOne(()=>Course,(course)=>course.studentCourses,{primary:true})
     course:Course;
 
-    @Field
+    @Field()
     @Column()
     progress:number
 
