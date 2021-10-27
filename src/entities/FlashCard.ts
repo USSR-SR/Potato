@@ -14,6 +14,6 @@ export class FlashCard extends BaseEntity{
     @Column()
     dataBack:string
 
-    @ManyToOne(()=>Student,(Student)=>Student.FlashCards)
+    @ManyToOne(()=>Student,(Student)=>Student.FlashCards,{primary:true})
     student:Student;
 }
