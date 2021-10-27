@@ -25,7 +25,7 @@ export class Student extends BaseEntity {
   @Column()
   password: number;
 
-  @OneToMany(()=> StudentCourse, (studentCourses) => studentCourses.student )
+  @OneToMany(()=> StudentCourse, (studentCourse) => studentCourse.student )
   studentCourses: StudentCourse[]
 
 }
