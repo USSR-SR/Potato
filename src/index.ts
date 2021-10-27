@@ -8,6 +8,7 @@ import { buildSchema } from "type-graphql";
 import { CourseResolver } from "./resolvers/course";
 import cors from "cors";
 import { MyContext } from "./types";
+import { StudentResolver } from "./resolvers/student";
 
 const main = async () => {
   const conn = await createConnection(ormConfig);
@@ -24,7 +25,7 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [CourseResolver],
+      resolvers: [CourseResolver, StudentResolver],
       validate: false,
     }),
     context: ({ req, res }): MyContext => ({ req, res }),

@@ -1,9 +1,11 @@
+import { StudentCourse } from './entities/StudentCourse';
+import { Student } from './entities/Student';
 import { createConnection } from "typeorm";
 import { __prod__ } from "./constants";
 import { Course } from "./entities/Course";
 
 export default {
-  entities: [Course],
+  entities: [Course,Student,StudentCourse],
   type: "postgres",
   database: "potatoDB",
   username: "postgres",
