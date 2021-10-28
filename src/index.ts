@@ -30,6 +30,7 @@ const main = async () => {
     username: process.env.MEMCACHEDCLOUD_USERNAME,
     password: process.env.MEMCACHEDCLOUD_PASSWORD,
   });
+  console.log(memClient.servers);
 
   const conn = await createConnection(ormConfig);
   conn.runMigrations();
