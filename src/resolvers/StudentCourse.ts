@@ -64,7 +64,7 @@ export class StudentCourseResolver {
   async getCourseStudent(@Arg("id") id: number): Promise<Student[]> {
     const student_linked = (
       await StudentCourse.find({ relations: ["student", "course"] })
-    ).filter((sc) => `${sc.course.id}` === id);
+    ).filter((sc) => sc.course.id === id);
     const students = student_linked.map((sc) => sc.student);
     console.log(      await StudentCourse.find({ relations: ["student", "course"] })
     );
