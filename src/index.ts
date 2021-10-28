@@ -13,7 +13,7 @@ import { StudentResolver } from "./resolvers/student";
 import { FlashCardREsolver } from "./resolvers/flashcard";
 import session from "express-session";
 import connectpgSimple from "connect-pg-simple";
-import { Client, defaults } from "pg";
+import { defaults } from "pg";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 
 declare module "express-session" {
@@ -27,8 +27,6 @@ const main = async () => {
     rejectUnauthorized: false,
   };
   const PGStore = connectpgSimple(session);
-  const pgClient = new Client(process.env.DATABASE_URL);
-  pgClient.connect();
 
   const conn = await createConnection(ormConfig);
   conn.runMigrations();
