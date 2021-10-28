@@ -9,8 +9,11 @@ export default {
   entities: [Course,Student,StudentCourse,FlashCard],
   type: "postgres",
   database: "potatoDB",
-  username: "postgres",
-  password: "Shivral31",
+  url: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
   logging: !__prod__,
+  debug: !__prod__,
   synchronize: true,
 } as Parameters<typeof createConnection>[0];
