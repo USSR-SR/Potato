@@ -14,7 +14,7 @@ export class StudentCourse extends BaseEntity{
     @ManyToOne(()=>Course,(course)=>course.studentCourses,{primary:true, nullable:true})
     course:Course;
 
-    @Field()
+    @Field({defaultValue:0})
     @Column()
     progress:number
 }

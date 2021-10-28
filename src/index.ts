@@ -1,3 +1,4 @@
+import { StudentCourseResolver } from './resolvers/StudentCourse';
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import { __prod__ } from "./constants";
@@ -26,7 +27,7 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [CourseResolver, StudentResolver,FlashCardREsolver],
+      resolvers: [CourseResolver, StudentResolver,FlashCardREsolver,StudentCourseResolver],
       validate: false,
     }),
     context: ({ req, res }): MyContext => ({ req, res }),
