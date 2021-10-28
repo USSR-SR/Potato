@@ -26,9 +26,6 @@ const main = async () => {
   const RedisStore = connectRedis(session);
   const redisClient = redis.createClient(process.env.REDISCLOUD_URL || "", {
     no_ready_check: true,
-    tls: {
-      rejectUnauthorised: false,
-    },
   });
 
   const conn = await createConnection(ormConfig);
