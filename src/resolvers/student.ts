@@ -52,10 +52,14 @@ export class StudentResolver {
     @Arg("details") loginInput: LoginInput,
     @Ctx() { req }: MyContext
   ): Promise<Student | undefined> {
-    const stud = await Student.findOne({username: loginInput.username});
+    console.log("hey");
+    const stud = await Student.findOne({ username: loginInput.username });
+    console.log(stud);
     if (stud !== undefined) {
-      req.session.username = stud.username;
-      return stud;
+      if (stud.password === loginInput.password) {
+        req.session.username = stud.username;
+        return stud;
+      }
     }
     return undefined;
   }
