@@ -15,9 +15,15 @@ class StudentDetails {
   mobile_num: string;
 }
 
+@InputType()
+class LoginInput{
+  @Field()
+  username:string
+}
+
 @Resolver()
 export class StudentResolver {
-  @Mutation(()=> Student, {nullable: true})
+  @Mutation(() => Student, { nullable: true })
   async createStudent(
     @Arg("details") details: StudentDetails
   ): Promise<Student | undefined> {
@@ -28,5 +34,7 @@ export class StudentResolver {
   async getAllStudents(): Promise<Student[]> {
     return Student.find();
   }
-  
+
+  // @Mutation(() => Student)
+  // login(@Arg("details"):) {}
 }

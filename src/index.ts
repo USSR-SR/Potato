@@ -1,4 +1,4 @@
-import { StudentCourseResolver } from './resolvers/StudentCourse';
+import { StudentCourseResolver } from './resolvers/studentcourse';
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import { __prod__ } from "./constants";
