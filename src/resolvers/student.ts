@@ -1,5 +1,13 @@
 import { MyContext } from "src/types";
-import { Arg, Ctx, Field, InputType, Mutation, Query, Resolver } from "type-graphql";
+import {
+  Arg,
+  Ctx,
+  Field,
+  InputType,
+  Mutation,
+  Query,
+  Resolver,
+} from "type-graphql";
 import { Student } from "../entities/Student";
 
 @InputType()
@@ -17,12 +25,12 @@ class StudentDetails {
 }
 
 @InputType()
-class LoginInput{
+class LoginInput {
   @Field()
-  username:string
+  username: string;
 
   @Field()
-  password:string
+  password: string;
 }
 
 @Resolver()
@@ -40,21 +48,23 @@ export class StudentResolver {
   }
 
   @Mutation(() => Student)
-  async login(@Arg("details")loginInput:LoginInput,@Ctx(){req}:MyContext):Promise<Student|undefined> {
-    const stud=await Student.findOne({username:loginInput.username,password:loginInput.password})
-    if(stud!==undefined){
-      req.session.username=stud.username;
-      
+  async login(
+    @Arg("details") loginInput: LoginInput,
+    @Ctx() { req }: MyContext
+  ): Promise<Student | undefined> {
+    const stud = await Student.findOne({username: loginInput.username});
+    if (stud !== undefined) {
+      req.session.username = stud.username;
       return stud;
     }
     return undefined;
   }
 
-  @Query(()=>Student,{nullable:true})
-  async me(@Ctx(){req}:MyContext):Promise<Student|undefined>{
-    if(!req.session.username){
-      return undefined
+  @Query(() => Student, { nullable: true })
+  async me(@Ctx() { req }: MyContext): Promise<Student | undefined> {
+    if (!req.session.username) {
+      return undefined;
     }
-    return Student.findOne({username:req.session.username})
+    return Student.findOne({ username: req.session.username });
   }
 }
