@@ -11,11 +11,8 @@ import cors from "cors";
 import { MyContext } from "./types";
 import { StudentResolver } from "./resolvers/student";
 import { FlashCardREsolver } from "./resolvers/flashcard";
-// import connectRedis from "connect-redis";
-// import redis from "redis";
-import connectMemcached from "connect-memcached";
-import { Client } from "memjs";
 import session from "express-session";
+import connectpgSimple from "connect-pg-simple";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 
 declare module "express-session" {
@@ -25,16 +22,7 @@ declare module "express-session" {
 }
 
 const main = async () => {
-  const MemcachedStore = connectMemcached(session);
-  const memClient = Client.create(process.env.MEMCACHEDCLOUD_SERVERS, {
-    username: process.env.MEMCACHEDCLOUD_USERNAME,
-    password: process.env.MEMCACHEDCLOUD_PASSWORD,
-  });
-  console.log(memClient.servers);
-  // const servers = memClient.servers.map((server) => `${server.host}:${server.port}`);
-  const servers = [
-    "memcached-16532.c265.us-east-1-2.ec2.cloud.redislabs.com:16532",
-  ];
+  const PGStore = connectpgSimple(session);
 
   const conn = await createConnection(ormConfig);
   conn.runMigrations();
@@ -49,9 +37,9 @@ const main = async () => {
   );
   app.use(
     session({
-      store: new MemcachedStore({
-        hosts: servers,
-        secret: "sldjsoidjoiasjdoijs",
+      store: new PGStore({
+        conString: process.env.DATABASE_URL,
+        createTableIfMissing: true
       }),
       secret: "somesecretbro",
       resave: false,
