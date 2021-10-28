@@ -23,14 +23,14 @@ declare module "express-session" {
 }
 
 const main = async () => {
-  defaults.ssl = true;  
+  defaults.ssl = {
+    rejectUnauthorized: false,
+  };
   const PGStore = connectpgSimple(session);
   const pgClient = new Client(process.env.DATABASE_URL);
   pgClient.connect();
 
   const conn = await createConnection(ormConfig);
-
-
   conn.runMigrations();
 
   const app = express();
@@ -51,6 +51,7 @@ const main = async () => {
       resave: false,
       saveUninitialized: false,
       proxy: true,
+
     })
   );
 
