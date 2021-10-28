@@ -30,7 +30,7 @@ const main = async () => {
     username: process.env.MEMCACHEDCLOUD_USERNAME,
     password: process.env.MEMCACHEDCLOUD_PASSWORD,
   });
-  console.log(memClient.servers);
+  const servers = memClient.servers.map((server) => `${server.host}:${server.port}`);
 
   const conn = await createConnection(ormConfig);
   conn.runMigrations();
@@ -46,7 +46,7 @@ const main = async () => {
   app.use(
     session({
       store: new MemcachedStore({
-        hosts: memClient.servers,
+        hosts: servers,
         secret: "sldjsoidjoiasjdoijs",
       }),
       secret: "somesecretbro",
