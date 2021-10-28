@@ -19,6 +19,9 @@ class StudentDetails {
 class LoginInput{
   @Field()
   username:string
+
+  @Field()
+  password:string
 }
 
 @Resolver()
@@ -35,6 +38,12 @@ export class StudentResolver {
     return Student.find();
   }
 
-  // @Mutation(() => Student)
-  // login(@Arg("details"):) {}
+  @Mutation(() => Student)
+  async login(@Arg("details")loginInput:LoginInput):Promise<Student|undefined> {
+    const stud=await Student.findOne({username:loginInput.username,password:loginInput.password})
+    if(stud!==undefined){
+      return stud;
+    }
+    return undefined;
+  }
 }
