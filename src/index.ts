@@ -11,8 +11,10 @@ import cors from "cors";
 import { MyContext } from "./types";
 import { StudentResolver } from "./resolvers/student";
 import { FlashCardREsolver } from "./resolvers/flashcard";
-import connectRedis from "connect-redis";
-import redis from "redis";
+// import connectRedis from "connect-redis";
+// import redis from "redis";
+import connectMemcached from "connect-memcached";
+import { Client } from "memjs";
 import session from "express-session";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 
@@ -23,12 +25,10 @@ declare module "express-session" {
 }
 
 const main = async () => {
-  const RedisStore = connectRedis(session);
-  const redisClient = redis.createClient(process.env.REDIS_URL || "", {
-    no_ready_check: true,
-    tls: {
-      rejectUnauthorised: false,
-    },
+  const MemcachedStore = connectMemcached(session);
+  const memClient = Client.create(process.env.MEMCACHEDCLOUD_SERVERS, {
+    username: process.env.MEMCACHEDCLOUD_USERNAME,
+    password: process.env.MEMCACHEDCLOUD_PASSWORD,
   });
 
   const conn = await createConnection(ormConfig);
@@ -44,20 +44,14 @@ const main = async () => {
   );
   app.use(
     session({
-      name: "qid",
-      store: new RedisStore({
-        client: redisClient,
-        disableTouch: true,
+      store: new MemcachedStore({
+        hosts: memClient.servers,
+        secret: "sldjsoidjoiasjdoijs",
       }),
-      cookie: {
-        maxAge: 1000 * 60 * 60 * 24 * 365 * 10, //10 years
-        httpOnly: true, //make cookie not accessible to front end
-        sameSite: "lax", //csrf protection(?)
-        secure: __prod__, //cookie works only in https
-      },
       secret: "somesecretbro",
       resave: false,
       saveUninitialized: false,
+      proxy: true,
     })
   );
 
