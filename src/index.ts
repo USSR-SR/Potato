@@ -24,7 +24,7 @@ declare module "express-session" {
 
 const main = async () => {
   const RedisStore = connectRedis(session);
-  const redisClient = redis.createClient(process.env.REDISCLOUD_URL || "", {
+  const redisClient = redis.createClient(process.env.REDIS_URL || "", {
     no_ready_check: true,
     tls: {
       rejectUnauthorised: false,
