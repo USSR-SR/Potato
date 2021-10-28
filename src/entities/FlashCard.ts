@@ -7,6 +7,9 @@ import { StudentCourse } from "./StudentCourse";
 @Entity()
 export class FlashCard extends BaseEntity{
     @Field()
+    @PrimaryGeneratedColumn()
+    id:number;
+    @Field()
     @Column()
     dataFront:string
 
