@@ -41,15 +41,20 @@ const main = async () => {
   );
   app.use(
     session({
+      name: "sid",
       store: new PGStore({
         conString: process.env.DATABASE_URL,
         createTableIfMissing: true,
       }),
+      cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 365 * 10,
+        httpOnly: true,
+        sameSite: "lax",
+        secure: __prod__,
+      },
       secret: "somesecretbro",
       resave: false,
       saveUninitialized: false,
-      proxy: true,
-
     })
   );
 
