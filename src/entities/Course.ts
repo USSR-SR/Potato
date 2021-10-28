@@ -7,7 +7,7 @@ import { StudentCourse } from "./StudentCourse";
 export class Course extends BaseEntity {
   @Field()
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
   @Field()
   @Column()

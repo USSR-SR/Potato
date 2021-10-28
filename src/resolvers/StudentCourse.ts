@@ -1,9 +1,13 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/jesus
 import { getConnection } from "typeorm";
 import { StudentCourse } from "../entities/StudentCourse";
 import { Arg, Field, InputType, Mutation, Query, Resolver } from "type-graphql";
 import { Course } from "../entities/Course";
 import { Student } from "../entities/Student";
+<<<<<<< HEAD
 =======
 import { Course } from './../entities/Course';
 import { getConnection } from 'typeorm';
@@ -11,13 +15,15 @@ import { StudentCourse } from '../entities/StudentCourse';
 import { Arg, Field, InputType, Mutation, Query, Resolver } from "type-graphql";
 import { Student } from '../entities/Student';
 >>>>>>> origin/jesus
+=======
+>>>>>>> origin/jesus
 
 @InputType()
 class StudentCourseDetails {
   @Field()
   username: string;
   @Field()
-  id: string;
+  id:  number;
 }
 
 Resolver();
@@ -41,20 +47,21 @@ export class StudentCourseResolver {
     }
     return undefined;
   }
-  @Query(()=> [Course])
-  async getStudentCourses (
-    @Arg("Username") username : string
-  ): Promise<Course[]>{
+
+  @Query(() => [Course])
+  async getStudentCourses(
+    @Arg("Username") username: string
+  ): Promise<Course[]> {
     const student_courses = (
-      await StudentCourse.find({ relations : ["student","course"]})
-    ).filter((sc) => (sc.student.username === username));
+      await StudentCourse.find({ relations: ["student", "course"] })
+    ).filter((sc) => sc.student.username === username);
     const courses = student_courses.map((sc) => sc.course);
 
     return courses;
   }
 
   @Query(() => [Student])
-  async getCourseStudent(@Arg("id") id: string): Promise<Student[]> {
+  async getCourseStudent(@Arg("id") id: number): Promise<Student[]> {
     const student_linked = (
       await StudentCourse.find({ relations: ["student", "course"] })
     ).filter((sc) => `${sc.course.id}` === id);
