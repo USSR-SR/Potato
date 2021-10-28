@@ -1,5 +1,5 @@
 import { Field, ObjectType } from "type-graphql";
-import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, OneToMany } from "typeorm";
 import { FlashCard } from "./FlashCard";
 import { StudentCourse } from "./StudentCourse";
 
