@@ -1,7 +1,7 @@
+import { Course } from './../entities/Course';
 import { getConnection } from 'typeorm';
-import { StudentCourse } from './../entities/StudentCourse';
+import { StudentCourse } from '../entities/StudentCourse';
 import { Arg, Field, InputType, Mutation, Query, Resolver } from "type-graphql";
-import { Course } from '../entities/Course';
 import { Student } from '../entities/Student';
 
 @InputType()
@@ -36,9 +36,9 @@ export class StudentCourseResolver {
   @Query(()=> [Course])
   async getStudentCourses (
     @Arg("Username") username : string
-  ): Promise<Course[] | undefined>{
+  ): Promise<Course[]>{
     const student_courses = (
-      await StudentCourse.find({ relations : ["student"]})
+      await StudentCourse.find({ relations : ["student","course"]})
     ).filter((sc) => (sc.student.username === username));
     const courses = student_courses.map((sc) => sc.course);
     return courses;
