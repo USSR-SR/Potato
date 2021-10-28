@@ -1,5 +1,4 @@
-
-import { Course } from './../entities/Course';
+import { Course } from '../entities/Course';
 import { getConnection } from 'typeorm';
 import { StudentCourse } from '../entities/StudentCourse';
 import { Arg, Field, InputType, Mutation, Query, Resolver } from "type-graphql";
