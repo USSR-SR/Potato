@@ -10,7 +10,7 @@ export default {
   type: "postgres",
   database: "potatoDB",
   username: "postgres",
-  password: "Shivral31",
+  password: "2002",
   logging: !__prod__,
   synchronize: true,
 } as Parameters<typeof createConnection>[0];

@@ -9,7 +9,7 @@ class StudentCourseDetails {
   @Field()
   username: string;
   @Field()
-  id: string;
+  id:  number;
 }
 
 Resolver();
@@ -46,7 +46,7 @@ export class StudentCourseResolver {
   }
 
   @Query(() => [Student])
-  async getCourseStudent(@Arg("id") id: string): Promise<Student[]> {
+  async getCourseStudent(@Arg("id") id: number): Promise<Student[]> {
     const student_linked = (
       await StudentCourse.find({ relations: ["student", "course"] })
     ).filter((sc) => sc.course.id === id);
