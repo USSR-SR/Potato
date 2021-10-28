@@ -1,22 +1,9 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> origin/jesus
-import { getConnection } from "typeorm";
-import { StudentCourse } from "../entities/StudentCourse";
-import { Arg, Field, InputType, Mutation, Query, Resolver } from "type-graphql";
-import { Course } from "../entities/Course";
-import { Student } from "../entities/Student";
-<<<<<<< HEAD
-=======
+
 import { Course } from './../entities/Course';
 import { getConnection } from 'typeorm';
 import { StudentCourse } from '../entities/StudentCourse';
 import { Arg, Field, InputType, Mutation, Query, Resolver } from "type-graphql";
 import { Student } from '../entities/Student';
->>>>>>> origin/jesus
-=======
->>>>>>> origin/jesus
 
 @InputType()
 class StudentCourseDetails {
