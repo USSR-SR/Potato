@@ -1,3 +1,4 @@
+import { StudentCourseResolver } from './resolvers/StudentCourse';
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import { __prod__ } from "./constants";
@@ -8,6 +9,8 @@ import { buildSchema } from "type-graphql";
 import { CourseResolver } from "./resolvers/course";
 import cors from "cors";
 import { MyContext } from "./types";
+import { StudentResolver } from "./resolvers/student";
+import { FlashCardREsolver } from "./resolvers/flashcard";
 
 const main = async () => {
   const conn = await createConnection(ormConfig);
@@ -24,7 +27,7 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [CourseResolver],
+      resolvers: [CourseResolver, StudentResolver,FlashCardREsolver,StudentCourseResolver],
       validate: false,
     }),
     context: ({ req, res }): MyContext => ({ req, res }),
