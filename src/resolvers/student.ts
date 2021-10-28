@@ -28,4 +28,5 @@ export class StudentResolver {
   async getAllStudents(): Promise<Student[]> {
     return Student.find();
   }
+  
 }
