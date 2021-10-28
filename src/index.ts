@@ -13,6 +13,7 @@ import { StudentResolver } from "./resolvers/student";
 import { FlashCardREsolver } from "./resolvers/flashcard";
 import session from "express-session";
 import connectpgSimple from "connect-pg-simple";
+import { Client, defaults } from "pg";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 
 declare module "express-session" {
@@ -22,9 +23,14 @@ declare module "express-session" {
 }
 
 const main = async () => {
+  defaults.ssl = true;  
   const PGStore = connectpgSimple(session);
+  const pgClient = new Client(process.env.DATABASE_URL);
+  pgClient.connect();
 
   const conn = await createConnection(ormConfig);
+
+
   conn.runMigrations();
 
   const app = express();
@@ -39,7 +45,7 @@ const main = async () => {
     session({
       store: new PGStore({
         conString: process.env.DATABASE_URL,
-        createTableIfMissing: true
+        createTableIfMissing: true,
       }),
       secret: "somesecretbro",
       resave: false,
