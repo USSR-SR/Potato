@@ -30,9 +30,11 @@ const main = async () => {
     username: process.env.MEMCACHEDCLOUD_USERNAME,
     password: process.env.MEMCACHEDCLOUD_PASSWORD,
   });
-  memClient;
+  console.log(memClient.servers);
   // const servers = memClient.servers.map((server) => `${server.host}:${server.port}`);
-  const servers = ["memcached-16532.c265.us-east-1-2.ec2.cloud.redislabs.com:16532"];
+  const servers = [
+    "memcached-16532.c265.us-east-1-2.ec2.cloud.redislabs.com:16532",
+  ];
 
   const conn = await createConnection(ormConfig);
   conn.runMigrations();
