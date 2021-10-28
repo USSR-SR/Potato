@@ -51,10 +51,8 @@ export class StudentResolver {
   async login(
     @Arg("details") loginInput: LoginInput,
     @Ctx() { req }: MyContext
-  ): Promise<Student | undefined> {
-    console.log("hey");
+  ): Promise<Student | undefined> {;
     const stud = await Student.findOne({ username: loginInput.username });
-    console.log(stud);
     if (stud !== undefined) {
       if (stud.password === loginInput.password) {
         req.session.username = stud.username;
