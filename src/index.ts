@@ -70,6 +70,7 @@ const main = async () => {
     }),
     plugins: [ApolloServerPluginLandingPageGraphQLPlayground({})],
     context: ({ req, res }): MyContext => ({ req, res }),
+    introspection: true,
   });
   await apolloServer.start();
   apolloServer.applyMiddleware({ app, cors: false });
