@@ -68,7 +68,7 @@ const main = async () => {
       ],
       validate: false,
     }),
-    plugins: [ApolloServerPluginLandingPageGraphQLPlayground({})],
+    // plugins: [ApolloServerPluginLandingPageGraphQLPlayground({})],
     context: ({ req, res }): MyContext => ({ req, res }),
     introspection: true,
   });
