@@ -14,7 +14,6 @@ import { FlashCardREsolver } from "./resolvers/flashcard";
 import session from "express-session";
 import connectpgSimple from "connect-pg-simple";
 import { defaults } from "pg";
-import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 
 declare module "express-session" {
   export interface SessionData {
