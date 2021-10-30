@@ -49,7 +49,7 @@ const main = async () => {
         maxAge: 1000 * 60 * 60 * 24 * 365 * 10,
         httpOnly: true,
         sameSite: "Lax",
-        secure: __prod__,
+        secure: true,
       },
       secret: "somesecretbro",
       resave: false,
