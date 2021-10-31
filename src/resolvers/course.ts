@@ -11,6 +11,9 @@ class CourseDetails {
   parts: number;
   @Field()
   subject: string;
+
+  @Field()
+  body:string;
 }
 
 @Resolver()
