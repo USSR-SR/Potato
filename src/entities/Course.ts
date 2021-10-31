@@ -25,6 +25,10 @@ export class Course extends BaseEntity {
   @Column()
   parts: number;
 
+  @Field({nullable:true})
+  @Column()
+  body:string;
+
   @OneToMany(() => StudentCourse, (studentCourse) => studentCourse.course,{nullable:true})
   studentCourses: StudentCourse []
 
